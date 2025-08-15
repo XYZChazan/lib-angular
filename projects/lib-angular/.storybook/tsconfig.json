@@ -1,11 +1,16 @@
 {
   "extends": "../tsconfig.lib.json",
   "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "types": ["node"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
-  "include": ["../src/**/*.stories.*", "./preview.ts"],
+  "include": ["../src/**/*.stories.*",
+              "./preview.ts",
+              "../projects/lib-angular/src/lib/**/*.stories.ts",
+              ],
   "files": ["./typings.d.ts"]
 }

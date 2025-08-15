@@ -6,89 +6,139 @@
     "interceptors": [],
     "classes": [],
     "directives": [],
-    "components": [],
+    "components": [
+        {
+            "name": "StoryWrapperComponent",
+            "id": "component-StoryWrapperComponent-a4416c1e76dfa7fbc99fbbca45a173f9d9d10994a65c6d567c32836bc9d592b72b1aaaf83b7591ddd6d9fe5d475a82e78965d068ddcced78e69925bf3d14f7d8",
+            "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-story-wrapper-sticky-alert",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div>\n  <p>Clique no botão para exibir o alerta com as configurações abaixo.</p>\n  <button (click)=\"isAlertVisible.set(true)\" style=\"padding: 8px 12px; cursor: pointer;\">\n    Mostrar Alerta\n  </button>\n\n  <lib-alert-sticky\n    [isVisible]=\"isAlertVisible()\"\n    (closed)=\"isAlertVisible.set(false)\"\n    [alertClass]=\"alertClass()\"\n    [dismissAfterSeconds]=\"dismissAfterSeconds()\">\n      {{ projectedContent() }}\n  </lib-alert-sticky>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "alertClass",
+                    "defaultValue": "input<string>('alert-blue')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "dismissAfterSeconds",
+                    "defaultValue": "input<number | null>(5)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "isAlertVisible",
+                    "defaultValue": "signal(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
+                },
+                {
+                    "name": "projectedContent",
+                    "defaultValue": "input<string>('Conteúdo do alerta.')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "AlertStickyComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Meta, StoryObj } from '@storybook/angular';\r\n\r\nimport { CommonModule } from '@angular/common';\r\nimport { Component, input, signal } from '@angular/core';\r\nimport { AlertStickyComponent } from './alert-sticky.component';\r\n\r\n@Component({\r\n    selector: 'app-story-wrapper-sticky-alert',\r\n    standalone: true,\r\n    imports: [CommonModule, AlertStickyComponent],\r\n    template: `\r\n    <div>\r\n      <p>Clique no botão para exibir o alerta com as configurações abaixo.</p>\r\n      <button (click)=\"isAlertVisible.set(true)\" style=\"padding: 8px 12px; cursor: pointer;\">\r\n        Mostrar Alerta\r\n      </button>\r\n\r\n      <lib-alert-sticky\r\n        [isVisible]=\"isAlertVisible()\"\r\n        (closed)=\"isAlertVisible.set(false)\"\r\n        [alertClass]=\"alertClass()\"\r\n        [dismissAfterSeconds]=\"dismissAfterSeconds()\">\r\n          {{ projectedContent() }}\r\n      </lib-alert-sticky>\r\n    </div>\r\n  `,\r\n})\r\nclass StoryWrapperComponent {\r\n    alertClass = input<string>('alert-blue');\r\n    dismissAfterSeconds = input<number | null>(5);\r\n    projectedContent = input<string>('Conteúdo do alerta.');\r\n\r\n    isAlertVisible = signal(false);\r\n}\r\n\r\nconst meta: Meta<StoryWrapperComponent> = {\r\n    title: 'Novamed BS Components/Alerts/Alerta Sticky',\r\n    component: StoryWrapperComponent,\r\n    tags: ['autodocs'],\r\n    argTypes: {\r\n        alertClass: {\r\n            control: 'select',\r\n            options: ['alert-blue', 'alert-red', 'alert-yellow', 'alert-green'],\r\n            description: 'Define o estilo de cor do alerta.',\r\n        },\r\n        dismissAfterSeconds: {\r\n            control: 'number',\r\n            description: 'Segundos para fechar. Use 0 ou deixe em branco para desativar.',\r\n        },\r\n        projectedContent: {\r\n            control: 'text',\r\n            name: 'Conteúdo do Alerta',\r\n            description: 'O texto a ser exibido dentro do alerta.',\r\n        },\r\n    },\r\n};\r\n\r\nexport default meta;\r\n\r\ntype Story = StoryObj<StoryWrapperComponent>;\r\n\r\nexport const ComAutoFechamento: Story = {\r\n    name: '1. Com Auto-Fechamento e Pausa',\r\n    args: {\r\n        alertClass: 'alert-blue',\r\n        dismissAfterSeconds: 7,\r\n        projectedContent: 'Este alerta desaparecerá em 7s. Passe o mouse sobre ele para pausar a contagem!',\r\n    },\r\n};\r\n\r\nexport const FechamentoManual: Story = {\r\n    name: '2. Fixo (Fechamento Manual)',\r\n    args: {\r\n        alertClass: 'alert-blue',\r\n        dismissAfterSeconds: null,\r\n        projectedContent: 'Este alerta só pode ser fechado manualmente.',\r\n    },\r\n};\r\n\r\nexport const AlertaDeErro: Story = {\r\n    name: '3. Alerta de Erro com Tempo Maior',\r\n    args: {\r\n        alertClass: 'alert-green',\r\n        dismissAfterSeconds: 12,\r\n        projectedContent: 'Ocorreu um erro na operação. Verifique os dados e tente novamente.',\r\n    },\r\n};\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        }
+    ],
     "modules": [],
     "miscellaneous": {
         "variables": [
             {
-                "name": "Large",
+                "name": "AlertaDeErro",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/button.stories.ts",
+                "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\r\n    name: '3. Alerta de Erro com Tempo Maior',\r\n    args: {\r\n        alertClass: 'alert-green',\r\n        dismissAfterSeconds: 12,\r\n        projectedContent: 'Ocorreu um erro na operação. Verifique os dados e tente novamente.',\r\n    },\r\n}"
             },
             {
-                "name": "LoggedIn",
+                "name": "ComAutoFechamento",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/header.stories.ts",
+                "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+                "defaultValue": "{\r\n    name: '1. Com Auto-Fechamento e Pausa',\r\n    args: {\r\n        alertClass: 'alert-blue',\r\n        dismissAfterSeconds: 7,\r\n        projectedContent: 'Este alerta desaparecerá em 7s. Passe o mouse sobre ele para pausar a contagem!',\r\n    },\r\n}"
             },
             {
-                "name": "LoggedIn",
+                "name": "FechamentoManual",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/page.stories.ts",
+                "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
+                "defaultValue": "{\r\n    name: '2. Fixo (Fechamento Manual)',\r\n    args: {\r\n        alertClass: 'alert-blue',\r\n        dismissAfterSeconds: null,\r\n        projectedContent: 'Este alerta só pode ser fechado manualmente.',\r\n    },\r\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/button.stories.ts",
+                "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<HeaderComponent>",
-                "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<PageComponent>",
-                "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                "type": "Meta<StoryWrapperComponent>",
+                "defaultValue": "{\r\n    title: 'Novamed BS Components/Alerts/Alerta Sticky',\r\n    component: StoryWrapperComponent,\r\n    tags: ['autodocs'],\r\n    argTypes: {\r\n        alertClass: {\r\n            control: 'select',\r\n            options: ['alert-blue', 'alert-red', 'alert-yellow', 'alert-green'],\r\n            description: 'Define o estilo de cor do alerta.',\r\n        },\r\n        dismissAfterSeconds: {\r\n            control: 'number',\r\n            description: 'Segundos para fechar. Use 0 ou deixe em branco para desativar.',\r\n        },\r\n        projectedContent: {\r\n            control: 'text',\r\n            name: 'Conteúdo do Alerta',\r\n            description: 'O texto a ser exibido dentro do alerta.',\r\n        },\r\n    },\r\n}"
             },
             {
                 "name": "preview",
@@ -99,36 +149,6 @@
                 "deprecationMessage": "",
                 "type": "Preview",
                 "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/lib-angular/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
             }
         ],
         "functions": [],
@@ -137,30 +157,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
-                "file": "projects/lib-angular/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<HeaderComponent>",
-                "file": "projects/lib-angular/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<PageComponent>",
-                "file": "projects/lib-angular/src/stories/page.stories.ts",
+                "rawtype": "StoryObj<StoryWrapperComponent>",
+                "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -169,120 +167,46 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/lib-angular/src/stories/button.stories.ts": [
+            "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts": [
                 {
-                    "name": "Large",
+                    "name": "AlertaDeErro",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/button.stories.ts",
+                    "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                    "defaultValue": "{\r\n    name: '3. Alerta de Erro com Tempo Maior',\r\n    args: {\r\n        alertClass: 'alert-green',\r\n        dismissAfterSeconds: 12,\r\n        projectedContent: 'Ocorreu um erro na operação. Verifique os dados e tente novamente.',\r\n    },\r\n}"
+                },
+                {
+                    "name": "ComAutoFechamento",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    name: '1. Com Auto-Fechamento e Pausa',\r\n    args: {\r\n        alertClass: 'alert-blue',\r\n        dismissAfterSeconds: 7,\r\n        projectedContent: 'Este alerta desaparecerá em 7s. Passe o mouse sobre ele para pausar a contagem!',\r\n    },\r\n}"
+                },
+                {
+                    "name": "FechamentoManual",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    name: '2. Fixo (Fechamento Manual)',\r\n    args: {\r\n        alertClass: 'alert-blue',\r\n        dismissAfterSeconds: null,\r\n        projectedContent: 'Este alerta só pode ser fechado manualmente.',\r\n    },\r\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/button.stories.ts",
+                    "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
-                }
-            ],
-            "projects/lib-angular/src/stories/header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<HeaderComponent>",
-                    "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-                }
-            ],
-            "projects/lib-angular/src/stories/page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/lib-angular/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<PageComponent>",
-                    "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                    "type": "Meta<StoryWrapperComponent>",
+                    "defaultValue": "{\r\n    title: 'Novamed BS Components/Alerts/Alerta Sticky',\r\n    component: StoryWrapperComponent,\r\n    tags: ['autodocs'],\r\n    argTypes: {\r\n        alertClass: {\r\n            control: 'select',\r\n            options: ['alert-blue', 'alert-red', 'alert-yellow', 'alert-green'],\r\n            description: 'Define o estilo de cor do alerta.',\r\n        },\r\n        dismissAfterSeconds: {\r\n            control: 'number',\r\n            description: 'Segundos para fechar. Use 0 ou deixe em branco para desativar.',\r\n        },\r\n        projectedContent: {\r\n            control: 'text',\r\n            name: 'Conteúdo do Alerta',\r\n            description: 'O texto a ser exibido dentro do alerta.',\r\n        },\r\n    },\r\n}"
                 }
             ],
             "projects/lib-angular/.storybook/preview.ts": [
@@ -301,39 +225,13 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/lib-angular/src/stories/button.stories.ts": [
+            "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
-                    "file": "projects/lib-angular/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/lib-angular/src/stories/header.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<HeaderComponent>",
-                    "file": "projects/lib-angular/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/lib-angular/src/stories/page.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<PageComponent>",
-                    "file": "projects/lib-angular/src/stories/page.stories.ts",
+                    "rawtype": "StoryObj<StoryWrapperComponent>",
+                    "file": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -358,87 +256,46 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/lib-angular/src/stories/button.stories.ts",
+                "filePath": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StoryWrapperComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Large",
+                "name": "AlertaDeErro",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/lib-angular/src/stories/button.stories.ts",
+                "filePath": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "meta",
+                "name": "ComAutoFechamento",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/lib-angular/src/stories/button.stories.ts",
+                "filePath": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Primary",
+                "name": "FechamentoManual",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/lib-angular/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/button.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/header.stories.ts",
+                "filePath": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -448,47 +305,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/lib-angular/src/stories/header.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/lib-angular/src/stories/page.stories.ts",
+                "filePath": "projects/lib-angular/src/lib/components/alerts/alert-sticky/alert-sticky.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
