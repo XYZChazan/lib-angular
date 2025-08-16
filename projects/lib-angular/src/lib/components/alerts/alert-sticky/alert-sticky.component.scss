@@ -1,0 +1,75 @@
+.alert-sticky-container {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-index-sticky);
+    border-radius: 5px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    min-width: 300px;
+}
+
+.alert-content {
+    line-height: 20px;
+    padding-right: 16px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.alert-blue {
+    background: var(--gradient-primary);
+    border: 1px solid var(--c-primary-700);
+    color: var(--c-white);
+}
+
+.alert-red {
+    background: var(--c-secondary);
+    border: 1px solid var(--c-secondary-700);
+}
+
+.alert-green {
+    background: var(--c-success);
+    border: 1px solid var(--c-success-700);
+}
+
+@keyframes deplete {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--c-white);
+  opacity: 0.5;
+  width: 0;
+
+  &.running {
+    width: 100%;
+    animation-name: deplete;
+    animation-timing-function: linear;
+  }
+}

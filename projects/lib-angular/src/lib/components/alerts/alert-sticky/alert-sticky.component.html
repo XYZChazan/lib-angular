@@ -1,0 +1,22 @@
+@if (isVisible()) {
+  <div
+    [ngClass]="['alert-sticky-container', alertClass()]"
+    role="alert"
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()">
+
+    <span class="alert-content">
+      <ng-content></ng-content>
+    </span>
+
+    <button type="button" class="close-btn" (click)="closeAlert()">×</button>
+
+    @if (isProgressBarVisible()) {
+      <div
+        class="progress-bar"
+        [class.running]="animationState()"
+        [style.animation-duration]="animationDuration()">
+      </div>
+    }
+  </div>
+}
